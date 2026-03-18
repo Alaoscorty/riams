@@ -1,0 +1,71 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 356 52% 45%; /* Wine Red #AD363D */
+    --primary-foreground: 0 0% 95%;
+    --secondary: 82 33% 32%; /* Leaf Green #5D7A29 */
+    --secondary-foreground: 0 0% 95%;
+    --muted: 0 0% 92%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 43 77% 45%; /* Golden Yellow #CC991A */
+    --accent-foreground: 0 0% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 356 52% 45%;
+    --radius: 0.75rem;
+  }
+  .dark {
+    --background: 0 0% 0%; /* Deep Black #000000 */
+    --foreground: 0 0% 95%; /* Off-White #F2F2F2 */
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 356 52% 45%;
+    --primary-foreground: 0 0% 95%;
+    --secondary: 82 33% 40%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 43 77% 45%;
+    --accent-foreground: 0 0% 10%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 356 52% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-headline;
+  }
+}
+
+/* Custom transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
