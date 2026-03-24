@@ -1,8 +1,5 @@
-
-"use client";
-
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useNavigate } from "react-router-dom";
 import { useStore } from "@/lib/store";
 import { translations } from "@/lib/translations";
 import { Navbar } from "@/components/layout/Navbar";
@@ -20,7 +17,7 @@ export default function CustomerLoginPage() {
   const t = translations[language];
   const [formData, setFormData] = useState({ name: "", phone: "" });
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
+  const navigate = useNavigate();
   const { firestore } = useFirebase();
   const { toast } = useToast();
 
@@ -51,7 +48,7 @@ export default function CustomerLoginPage() {
           description: `Ravi de vous revoir, ${customerData.name} !`
         });
         
-        router.push("/track");
+        navigate("/track");
       } else {
         toast({
           variant: "destructive",

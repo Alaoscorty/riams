@@ -1,6 +1,3 @@
-
-"use client";
-
 import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/home/Hero";
 import { CategoryCard } from "@/components/home/CategoryCard";
@@ -11,7 +8,7 @@ import { ChatAssistant } from "@/components/ai/ChatAssistant";
 import { MapPin, Clock, Phone, Mail, Briefcase } from "lucide-react";
 import { HomeGallery } from "@/components/home/HomeGallery";
 import { EmployeesSection } from "@/components/home/EmployeesSection";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
@@ -101,7 +98,7 @@ export default function Home() {
           </p>
           <div className="flex justify-center flex-wrap gap-4 mb-8">
             <Button asChild variant="outline" className="rounded-full border-primary text-primary hover:bg-primary/5 font-bold gap-2">
-              <Link href="/jobs"><Briefcase className="h-4 w-4" /> {t.job_offers}</Link>
+              <Link to="/jobs"><Briefcase className="h-4 w-4" /> {t.job_offers}</Link>
             </Button>
             {['Facebook', 'Instagram', 'WhatsApp'].map((social) => (
               <a key={social} href="#" className="flex items-center text-muted-foreground hover:text-primary transition-colors font-medium h-10 px-4">

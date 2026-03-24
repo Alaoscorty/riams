@@ -1,18 +1,36 @@
-
-"use client";
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { MessageCircle, X, Send, Bot, User } from "lucide-react";
-import { aiChatAssistantForCustomerQueries } from "@/ai/flows/ai-chat-assistant-for-customer-queries";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 
 interface Message {
   role: 'user' | 'bot';
   content: string;
+}
+
+// Simple FAQ responses without Genkit
+const faqResponses: Record<string, string> = {
+  "horaire": "Nous sommes ouverts tous les jours de 10h00 à 02h00 du matin !",
+  "adresse": "Nous sommes situés à Porto-Novo, quartier Dowa-Dédomin, juste à côté du Carrefour Gandaho.",
+  "téléphone": "Vous pouvez nous appeler au +229 97 00 00 00.",
+  "réservation": "Pour une réservation, veuillez nous contacter directement par téléphone ou WhatsApp.",
+  "menu": "Consultez notre menu en cliquant sur l'onglet Menu. Nous proposons grillades, poissons, burgers, snacks, boissons et cocktails.",
+  "livraison": "Oui, nous livrons dans les zones de Dowa, Djassin et Ouando !",
+  "paiement": "Nous acceptons les paiements par Mobile Money.",
+  "default": "Merci pour votre message ! Pour plus d'informations, veuillez nous contacter au +229 97 00 00 00 ou visiter notre menu."
+};
+
+function getBotResponse(message: string): string {
+  const lowerMessage = message.toLowerCase();
+  for (const [keyword, response] of Object.entries(faqResponses)) {
+    if (keyword !== "default" && lowerMessage.includes(keyword)) {
+      return response;
+    }
+  }
+  return faqResponses.default;
 }
 
 export function ChatAssistant() {
@@ -32,7 +50,9 @@ export function ChatAssistant() {
     setIsLoading(true);
 
     try {
-      const { response } = await aiChatAssistantForCustomerQueries({ message: userMsg });
+      // Simulate response delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      const response = getBotResponse(userMsg);
       setMessages(prev => [...prev, { role: 'bot', content: response }]);
     } catch (error) {
       setMessages(prev => [...prev, { role: 'bot', content: "Désolé, je rencontre un problème. Veuillez réessayer plus tard." }]);

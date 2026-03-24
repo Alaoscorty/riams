@@ -1,6 +1,3 @@
-
-"use client";
-
 import { Navbar } from "@/components/layout/Navbar";
 import { translations } from "@/lib/translations";
 import { Card, CardContent } from "@/components/ui/card";
@@ -23,7 +20,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { useState, useEffect, useMemo } from "react";
-import { useRouter } from "next/navigation";
+import { useNavigate } from "react-router-dom";
 import { useStore } from "@/lib/store";
 import { useFirebase, useCollection, useMemoFirebase, updateDocumentNonBlocking, addDocumentNonBlocking, deleteDocumentNonBlocking } from "@/firebase";
 import { collection, query, orderBy, doc } from "firebase/firestore";
@@ -33,7 +30,7 @@ export default function AdminDashboard() {
   const { language, isAuthenticated } = useStore();
   const { firestore } = useFirebase();
   const t = translations[language as keyof typeof translations] || translations.fr;
-  const router = useRouter();
+  const navigate = useNavigate();
   const { toast } = useToast();
   const [isMounted, setIsMounted] = useState(false);
 
@@ -53,7 +50,7 @@ export default function AdminDashboard() {
   const [isJobDialogOpen, setIsJobDialogOpen] = useState(false);
 
   useEffect(() => { setIsMounted(true); }, []);
-  useEffect(() => { if (isMounted && !isAuthenticated) router.push("/login"); }, [isMounted, isAuthenticated, router]);
+  useEffect(() => { if (isMounted && !isAuthenticated) navigate("/login"); }, [isMounted, isAuthenticated, navigate]);
 
   const ordersQuery = useMemoFirebase(() => firestore ? query(collection(firestore, 'orders'), orderBy('orderDate', 'desc')) : null, [firestore]);
   const dishesQuery = useMemoFirebase(() => firestore ? query(collection(firestore, 'dishes'), orderBy('name', 'asc')) : null, [firestore]);

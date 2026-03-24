@@ -1,6 +1,3 @@
-
-"use client";
-
 import { useStore } from "@/lib/store";
 import { translations } from "@/lib/translations";
 import { Button } from "@/components/ui/button";
@@ -11,13 +8,12 @@ import {
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
 import { ShoppingCart, Globe, Moon, Sun, Lock, ShieldCheck, LogOut, UserCircle } from "lucide-react";
-import Link from "next/link";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { useFirebase } from "@/firebase";
 
 export function Navbar() {
-  const router = useRouter();
+  const navigate = useNavigate();
   const { auth } = useFirebase();
   const { language, setLanguage, cart, isAuthenticated, customerSession, logout, theme, setTheme } = useStore();
   const t = translations[language as keyof typeof translations] || translations.fr;
@@ -45,7 +41,7 @@ export function Navbar() {
   const handleLogout = async () => {
     if (auth) await auth.signOut();
     logout();
-    router.push("/");
+    navigate("/");
   };
 
   if (!mounted) return null;
@@ -56,7 +52,7 @@ export function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b">
       <div className="container mx-auto px-4 h-20 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2">
           <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center font-headline text-white font-bold text-xl">
             R
           </div>
@@ -66,11 +62,11 @@ export function Navbar() {
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
-          <Link href="/" className="text-sm font-medium hover:text-primary transition-colors">{language === 'fr' ? 'Accueil' : 'Home'}</Link>
-          <Link href="/menu" className="text-sm font-medium hover:text-primary transition-colors">{language === 'fr' ? 'Menu' : 'Menu'}</Link>
-          <Link href="/track" className="text-sm font-medium hover:text-primary transition-colors">{language === 'fr' ? 'Suivi' : 'Tracking'}</Link>
+          <Link to="/" className="text-sm font-medium hover:text-primary transition-colors">{language === 'fr' ? 'Accueil' : 'Home'}</Link>
+          <Link to="/menu" className="text-sm font-medium hover:text-primary transition-colors">{language === 'fr' ? 'Menu' : 'Menu'}</Link>
+          <Link to="/track" className="text-sm font-medium hover:text-primary transition-colors">{language === 'fr' ? 'Suivi' : 'Tracking'}</Link>
           {isAuthenticated && (
-            <Link href="/admin" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 text-primary font-bold">
+            <Link to="/admin" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 text-primary font-bold">
               <ShieldCheck className="h-4 w-4" /> Admin
             </Link>
           )}
@@ -106,12 +102,12 @@ export function Navbar() {
             </Button>
           ) : (
             <div className="flex items-center gap-1">
-              <Link href="/auth">
+              <Link to="/auth">
                 <Button variant="ghost" size="icon" className="rounded-full text-muted-foreground" title={t.login_client}>
                   <UserCircle className="h-5 w-5" />
                 </Button>
               </Link>
-              <Link href="/login">
+              <Link to="/login">
                 <Button variant="ghost" size="icon" className="rounded-full text-muted-foreground" title="Admin">
                   <Lock className="h-5 w-5" />
                 </Button>
@@ -119,7 +115,7 @@ export function Navbar() {
             </div>
           )}
 
-          <Link href="/cart">
+          <Link to="/cart">
             <Button variant="ghost" size="icon" className="rounded-full relative">
               <ShoppingCart className="h-5 w-5" />
               {cartCount > 0 && (

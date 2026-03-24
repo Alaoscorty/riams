@@ -1,8 +1,5 @@
-"use client";
-
 import { Card, CardContent } from "@/components/ui/card";
-import Image from "next/image";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
 interface CategoryCardProps {
@@ -13,14 +10,13 @@ interface CategoryCardProps {
 
 export function CategoryCard({ id, name, image }: CategoryCardProps) {
   return (
-    <Link href={`/menu?category=${id}`}>
+    <Link to={`/menu?category=${id}`}>
       <Card className="group relative overflow-hidden h-64 border-none cursor-pointer bg-muted">
         {image && (
-          <Image 
+          <img 
             src={image} 
             alt={name} 
-            fill 
-            className="object-cover transition-transform duration-500 group-hover:scale-110"
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
         )}
         <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />

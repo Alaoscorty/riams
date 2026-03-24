@@ -1,6 +1,3 @@
-
-"use client";
-
 import { Navbar } from "@/components/layout/Navbar";
 import { useStore } from "@/lib/store";
 import { translations } from "@/lib/translations";

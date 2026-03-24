@@ -1,6 +1,3 @@
-
-"use client";
-
 import { Navbar } from "@/components/layout/Navbar";
 import { useStore } from "@/lib/store";
 import { translations } from "@/lib/translations";
@@ -10,7 +7,6 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/componen
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Briefcase, Loader2, ArrowRight, Clock, MapPin, DollarSign, ListChecks } from "lucide-react";
-import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 export default function JobsPage() {

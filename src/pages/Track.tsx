@@ -1,7 +1,3 @@
-
-"use client";
-
-import { useSearchParams, useRouter } from "next/navigation";
 import { Navbar } from "@/components/layout/Navbar";
 import { translations } from "@/lib/translations";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -15,18 +11,18 @@ import { Progress } from "@/components/ui/progress";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { Suspense, useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import { useFirebase, useDoc, useCollection, useMemoFirebase, updateDocumentNonBlocking } from "@/firebase";
 import { doc, collection, query, where } from "firebase/firestore";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import Link from "next/link";
 import { useStore } from "@/lib/store";
 import { useToast } from "@/hooks/use-toast";
 
 function TrackContent() {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const orderId = searchParams.get('id');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const orderId = searchParams.get('id') || '';
   const { firestore, isUserLoading } = useFirebase();
   const { language, customerSession } = useStore();
   const { toast } = useToast();
@@ -59,7 +55,7 @@ function TrackContent() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchId.trim()) {
-      router.push(`/track?id=${searchId.trim()}`);
+      setSearchParams({ id: searchId.trim() });
       setShowHistory(false);
     }
   };
@@ -128,7 +124,7 @@ function TrackContent() {
                       {t.order_status[o.status as keyof typeof t.order_status] || o.status}
                     </Badge>
                     <Button variant="ghost" size="icon" className="rounded-full bg-muted/50" asChild>
-                      <Link href={`/track?id=${o.id}`} onClick={() => setShowHistory(false)}>
+                      <Link to={`/track?id=${o.id}`} onClick={() => setShowHistory(false)}>
                         <ArrowRight className="h-4 w-4" />
                       </Link>
                     </Button>
@@ -323,7 +319,7 @@ function TrackContent() {
                         );
                       })()}
                       <Button variant="outline" asChild className="w-full h-12 rounded-full border-primary/20 hover:bg-primary/5 font-black gap-2">
-                        <a href={`https://wa.me/22997000000?text=Bonjour, je souhaite des informations sur ma commande #${order.id?.slice(0, 8).toUpperCase()}`} target="_blank">
+                        <a href={`https://wa.me/22997000000?text=Bonjour, je souhaite des informations sur ma commande #${order.id?.slice(0, 8).toUpperCase()}`} target="_blank" rel="noopener noreferrer">
                           <MessageSquare className="h-5 w-5 text-green-600" /> {t.send_whatsapp}
                         </a>
                       </Button>
@@ -353,9 +349,7 @@ export default function TrackPage() {
   return (
     <main className="min-h-screen pt-24 bg-muted/20">
       <Navbar />
-      <Suspense fallback={<div className="py-20 text-center"><Loader2 className="h-10 w-10 animate-spin mx-auto text-primary" /></div>}>
-        <TrackContent />
-      </Suspense>
+      <TrackContent />
     </main>
   );
 }

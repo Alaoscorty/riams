@@ -1,8 +1,5 @@
-
-"use client";
-
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useNavigate } from "react-router-dom";
 import { useStore } from "@/lib/store";
 import { Navbar } from "@/components/layout/Navbar";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -16,7 +13,7 @@ export default function LoginPage() {
   const [code, setCode] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
+  const navigate = useNavigate();
   const login = useStore((state) => state.login);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -28,7 +25,7 @@ export default function LoginPage() {
     const success = login(code);
     
     if (success) {
-      router.push("/admin");
+      navigate("/admin");
     } else {
       setError("Le code secret saisi est incorrect.");
       setCode("");

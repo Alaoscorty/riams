@@ -1,29 +1,23 @@
-
-"use client";
-
 import { useStore } from "@/lib/store";
 import { translations } from "@/lib/translations";
 import { Button } from "@/components/ui/button";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
-import Link from "next/link";
-import Image from "next/image";
+import { Link } from "react-router-dom";
 import { ShoppingBag, History, ShieldCheck } from "lucide-react";
 
 export function Hero() {
   const { language, isAuthenticated, customerSession } = useStore();
   const t = translations[language as keyof typeof translations] || translations.fr;
-  const heroImage = PlaceHolderImages.find(img => img.id === 'hero-restaurant');
+  const heroImage = PlaceHolderImages.find(img => img.id === 'hero-bg');
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
         {heroImage?.imageUrl && (
-          <Image 
+          <img 
             src={heroImage.imageUrl} 
             alt="Restaurant Hero" 
-            fill 
-            className="object-cover brightness-50"
-            priority
+            className="absolute inset-0 w-full h-full object-cover brightness-50"
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/20" />
@@ -39,19 +33,19 @@ export function Hero() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           {isAuthenticated ? (
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-white rounded-full px-10 py-7 text-lg shadow-lg gap-2">
-              <Link href="/admin"><ShieldCheck className="h-5 w-5" /> {t.admin_dashboard}</Link>
+              <Link to="/admin"><ShieldCheck className="h-5 w-5" /> {t.admin_dashboard}</Link>
             </Button>
           ) : customerSession ? (
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-white rounded-full px-10 py-7 text-lg shadow-lg gap-2">
-              <Link href="/track"><History className="h-5 w-5" /> {t.view_my_orders}</Link>
+              <Link to="/track"><History className="h-5 w-5" /> {t.view_my_orders}</Link>
             </Button>
           ) : (
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-white rounded-full px-10 py-7 text-lg shadow-lg gap-2">
-              <Link href="/menu"><ShoppingBag className="h-5 w-5" /> {t.order_now}</Link>
+              <Link to="/menu"><ShoppingBag className="h-5 w-5" /> {t.order_now}</Link>
             </Button>
           )}
           <Button asChild variant="outline" size="lg" className="border-white text-white hover:bg-white/10 rounded-full px-10 py-7 text-lg backdrop-blur-sm">
-            <Link href="/menu">{t.view_menu}</Link>
+            <Link to="/menu">{t.view_menu}</Link>
           </Button>
         </div>
       </div>

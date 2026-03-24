@@ -1,6 +1,3 @@
-
-"use client";
-
 import { Navbar } from "@/components/layout/Navbar";
 import { useStore, getDeliveryFee } from "@/lib/store";
 import { translations } from "@/lib/translations";
@@ -10,15 +7,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Trash2, Plus, Minus, ArrowLeft, Truck, Camera, CheckCircle, Loader2, Info } from "lucide-react";
-import Link from "next/link";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { useFirebase, setDocumentNonBlocking } from "@/firebase";
 import { doc, collection } from "firebase/firestore";
 
 export default function CartPage() {
-  const router = useRouter();
+  const navigate = useNavigate();
   const { toast } = useToast();
   const { firestore } = useFirebase();
   const { cart, language, updateQuantity, removeFromCart, deliveryZone, setDeliveryZone, clearCart, setCustomerSession } = useStore();
@@ -108,7 +104,7 @@ export default function CartPage() {
       setDocumentNonBlocking(orderRef, orderData, { merge: true });
       
       clearCart();
-      router.push(`/track?id=${orderRef.id}`);
+      navigate(`/track?id=${orderRef.id}`);
       toast({
         title: "Commande enregistrée",
         description: "Votre preuve de paiement a été envoyée pour vérification."
@@ -138,7 +134,7 @@ export default function CartPage() {
           </div>
           <h1 className="text-3xl font-headline font-bold mb-4">Votre panier est vide</h1>
           <Button asChild className="rounded-full bg-primary px-10">
-            <Link href="/menu">{t.view_menu}</Link>
+            <Link to="/menu">{t.view_menu}</Link>
           </Button>
         </div>
       </main>
@@ -151,7 +147,7 @@ export default function CartPage() {
       <div className="container mx-auto px-4">
         <div className="flex items-center gap-4 mb-8">
           <Button variant="ghost" size="icon" asChild>
-            <Link href="/menu"><ArrowLeft className="h-5 w-5" /></Link>
+            <Link to="/menu"><ArrowLeft className="h-5 w-5" /></Link>
           </Button>
           <h1 className="text-4xl font-headline font-bold">Mon Panier</h1>
         </div>
