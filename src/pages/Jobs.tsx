@@ -99,7 +99,7 @@ export default function JobsPage() {
                             </div>
                           </div>
                           <Button asChild className="rounded-full px-8 bg-accent hover:bg-accent/90 text-accent-foreground font-black">
-                            <a href="https://wa.me/22997000000" target="_blank">Postuler via WhatsApp</a>
+                            <a href="https://wa.me/22997000000" target="_blank" rel="noopener noreferrer" >Postuler via WhatsApp</a>
                           </Button>
                         </section>
                       </div>

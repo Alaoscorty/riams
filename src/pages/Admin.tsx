@@ -323,7 +323,7 @@ export default function AdminDashboard() {
                 <TableBody>
                   {isDishesLoading ? <TableRow><TableCell colSpan={4} className="text-center h-40"><Loader2 className="animate-spin mx-auto h-8 w-8 text-primary" /></TableCell></TableRow> : dishes?.map(dish => (
                     <TableRow key={dish.id} className="h-20 border-b last:border-none hover:bg-muted/30">
-                      <TableCell className="px-8"><div className="flex items-center gap-4"><img src={dish.imageUrl} className="h-12 w-12 rounded-xl object-cover border" /><span className="font-black">{dish.name}</span></div></TableCell>
+                      <TableCell className="px-8"><div className="flex items-center gap-4"><img alt="poisson" src={dish.imageUrl} className="h-12 w-12 rounded-xl object-cover border" /><span className="font-black">{dish.name}</span></div></TableCell>
                       <TableCell className="font-bold">{dish.price.toLocaleString()} FCFA</TableCell>
                       <TableCell><Badge variant={dish.isAvailable ? "default" : "secondary"} className={cn("rounded-full font-bold", dish.isAvailable ? "bg-green-600" : "bg-red-500 text-white")}>{dish.isAvailable ? "Disponible" : "Épuisé"}</Badge></TableCell>
                       <TableCell className="text-right px-8">
@@ -349,7 +349,7 @@ export default function AdminDashboard() {
                 <TableBody>
                   {isGalleryLoading ? <TableRow><TableCell className="text-center h-40"><Loader2 className="animate-spin mx-auto h-8 w-8 text-primary" /></TableCell></TableRow> : gallery?.map(img => (
                     <TableRow key={img.id} className="h-28 border-b">
-                      <TableCell className="px-8"><div className="h-20 w-32 rounded-xl overflow-hidden border"><img src={img.imageUrl} className="object-cover w-full h-full" /></div></TableCell>
+                      <TableCell className="px-8"><div className="h-20 w-32 rounded-xl overflow-hidden border"><img alt="Log" src={img.imageUrl} className="object-cover w-full h-full" /></div></TableCell>
                       <TableCell className="italic text-muted-foreground">{img.description}</TableCell>
                       <TableCell className="text-right px-8"><Button variant="ghost" size="icon" className="text-red-500" onClick={() => deleteDocumentNonBlocking(doc(firestore!, 'gallery', img.id))}><Trash2 className="h-5 w-5" /></Button></TableCell>
                     </TableRow>
@@ -367,7 +367,7 @@ export default function AdminDashboard() {
                 <TableBody>
                   {isEmployeesLoading ? <TableRow><TableCell colSpan={3} className="text-center h-40"><Loader2 className="animate-spin mx-auto h-8 w-8 text-primary" /></TableCell></TableRow> : employees?.map(emp => (
                     <TableRow key={emp.id} className="h-20 border-b">
-                      <TableCell className="px-8"><div className="flex items-center gap-4"><img src={emp.imageUrl} className="h-10 w-10 rounded-full object-cover border" /><span className="font-black">{emp.name}</span></div></TableCell>
+                      <TableCell className="px-8"><div className="flex items-center gap-4"><img alt="Logo de l'application" src={emp.imageUrl} className="h-10 w-10 rounded-full object-cover border" /><span className="font-black">{emp.name}</span></div></TableCell>
                       <TableCell className="font-bold text-muted-foreground">{emp.contact}</TableCell>
                       <TableCell className="text-right px-8"><Button variant="ghost" size="icon" onClick={() => { setEmployeeForm(emp); setIsEmployeeDialogOpen(true); }} className="rounded-full"><Pencil className="h-4 w-4" /></Button><Button variant="ghost" size="icon" className="text-red-500" onClick={() => deleteDocumentNonBlocking(doc(firestore!, 'employees', emp.id))}><Trash2 className="h-4 w-4" /></Button></TableCell>
                     </TableRow>

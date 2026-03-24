@@ -165,11 +165,11 @@ export default function CartPage() {
                     <p className="text-primary font-bold">{item.price.toLocaleString()} FCFA</p>
                   </div>
                   <div className="flex items-center gap-3 bg-muted rounded-full px-3 py-1">
-                    <button onClick={() => updateQuantity(item.id, -1)} className="p-1 hover:text-primary"><Minus className="h-4 w-4" /></button>
+                    <button title="ajouter" onClick={() => updateQuantity(item.id, -1)} className="p-1 hover:text-primary"><Minus className="h-4 w-4" /></button>
                     <span className="font-bold w-4 text-center">{item.quantity}</span>
                     <button onClick={() => updateQuantity(item.id, 1)} className="p-1 hover:text-primary"><Plus className="h-4 w-4" /></button>
                   </div>
-                  <Button variant="ghost" size="icon" onClick={() => removeFromCart(item.id)}>
+                  <Button title="retirer" variant="ghost" size="icon" onClick={() => removeFromCart(item.id)}>
                     <Trash2 className="h-5 w-5" />
                   </Button>
                 </CardContent>

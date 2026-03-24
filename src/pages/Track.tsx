@@ -11,8 +11,8 @@ import { Progress } from "@/components/ui/progress";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { useState, useMemo, useEffect } from "react";
-import { useNavigate, useSearchParams, Link } from "react-router-dom";
+import { useState, useMemo } from "react";
+import { useSearchParams, Link } from "react-router-dom";
 import { useFirebase, useDoc, useCollection, useMemoFirebase, updateDocumentNonBlocking } from "@/firebase";
 import { doc, collection, query, where } from "firebase/firestore";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -21,7 +21,6 @@ import { useToast } from "@/hooks/use-toast";
 
 function TrackContent() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
   const orderId = searchParams.get('id') || '';
   const { firestore, isUserLoading } = useFirebase();
   const { language, customerSession } = useStore();
