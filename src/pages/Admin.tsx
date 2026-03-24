@@ -5,7 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { 
-  ShoppingBag, Loader2, Eye, LayoutDashboard, Plus, Utensils,
+  Loader2, Eye, LayoutDashboard, Plus, Utensils,
   DollarSign, ListOrdered, Pencil, Trash2, Phone as PhoneIcon,
   CheckCircle, XCircle, Power, PowerOff, MoreVertical, Flame, Truck, Ban, MapPin,
   Briefcase

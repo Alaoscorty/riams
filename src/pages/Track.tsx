@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { translations } from "@/lib/translations";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { 
   CheckCircle2, Package, Truck, Clock, Receipt, Download, 
   MessageSquare, Loader2, Flame, AlertCircle, History, ArrowRight,

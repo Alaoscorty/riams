@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/home/Hero";
-import { CategoryCard } from "@/components/home/CategoryCard";
+import { CategoryCard } from "@/components/home/Categorycard";
 import { translations } from "@/lib/translations";
 import { useStore } from "@/lib/store";
 import { PlaceHolderImages } from "@/lib/placeholder-images";

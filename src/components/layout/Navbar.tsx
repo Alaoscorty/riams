@@ -53,8 +53,12 @@ export function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b">
       <div className="container mx-auto px-4 h-20 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center font-headline text-white font-bold text-xl">
-            R
+          <div className="w-15 h-15 rounded-full overflow-hidden flex items-center justify-center">
+            <img 
+              src="/logo.png" 
+              alt="Logo"
+              className="w-full h-full object-cover"
+            />
           </div>
           <span className="font-headline font-bold text-xl tracking-tight hidden sm:inline-block">
             RIAM'S <span className="text-primary">7.16</span>

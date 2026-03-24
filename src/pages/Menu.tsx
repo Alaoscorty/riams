@@ -2,7 +2,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { useStore } from "@/lib/store";
 import { translations } from "@/lib/translations";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useState, useEffect } from "react";
 import { Plus, Loader2, UtensilsCrossed, Ban, AlertCircle } from "lucide-react";

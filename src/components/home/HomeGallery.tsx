@@ -1,6 +1,4 @@
 
-"use client";
-
 import { useFirebase, useCollection, useMemoFirebase } from "@/firebase";
 import { collection, query, orderBy } from "firebase/firestore";
 import { 
@@ -11,7 +9,6 @@ import {
   CarouselPrevious 
 } from "@/components/ui/carousel";
 import { Loader2, ImageIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
 import Autoplay from "embla-carousel-autoplay";
 
 export function HomeGallery() {
@@ -52,7 +49,7 @@ export function HomeGallery() {
         className="w-full"
       >
         <CarouselContent>
-          {images.map((img, idx) => (
+          {images.map((img) => (
             <CarouselItem key={img.id}>
               <div className="relative h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl group/item">
                 <img 
